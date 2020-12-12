@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  auth:
+    build: "./auth"
+
+  website:
+    build: "./website"
+
+  nginx:
+    image: nginx:1.19.5-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+    command: [nginx-debug, "-g", "daemon off;"]
